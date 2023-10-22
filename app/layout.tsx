@@ -1,14 +1,16 @@
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+import "./theme-config.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
-import "@radix-ui/themes/styles.css";
 import Navbar from "./Navbar";
-import { Theme } from "@radix-ui/themes";
+import "./globals.css";
 
 // const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "700"],
+	variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -22,9 +24,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={poppins.className}>
-				<Theme>
+		<html lang="en" className={poppins.variable}>
+			<body>
+				<Theme appearance="light" accentColor="ruby">
 					<Navbar />
 					{children}
 				</Theme>
