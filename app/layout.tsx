@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 import Navbar from "./Navbar";
+import { Theme } from "@radix-ui/themes";
 
 // const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -22,8 +24,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={poppins.className}>
-				<Navbar />
-				{children}
+				<Theme>
+					<Navbar />
+					{children}
+				</Theme>
 			</body>
 		</html>
 	);
