@@ -1,5 +1,4 @@
-import { Table, TableColumnHeaderCell, TableCell } from "@radix-ui/themes";
-import IssueStatusBadge from "../components/IssueStatusBadge";
+import { Table, TableCell, TableColumnHeaderCell } from "@radix-ui/themes";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import IssueActions from "./components/IssueActions";
