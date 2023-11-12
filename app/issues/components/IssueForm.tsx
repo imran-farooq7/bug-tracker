@@ -32,19 +32,16 @@ const IssueForm = ({ issue }: Props) => {
 		formState: { errors },
 	} = useForm<IssueForm>();
 	const onSubmit = handleSubmit(async (data) => {
-		if (issue) {
-			try {
-				setLoading(true);
+		try {
+			setLoading(true);
+			if (issue) {
 				await axios.patch(`/api/issues/${issue.id}`, data);
-				router.push("/issues");
-			} catch (error) {}
-		} else {
-			try {
-				setLoading(true);
+			} else {
 				await axios.post("/api/issues", data);
-				router.push("/issues");
-			} catch (error) {}
-		}
+			}
+			router.push("/issues");
+			router.refresh();
+		} catch (error) {}
 	});
 	return (
 		<form
@@ -69,7 +66,7 @@ const IssueForm = ({ issue }: Props) => {
 			/>
 
 			<Button className="w-full" size={"4"} radius="full" disabled={loading}>
-				Submit New Issue {loading && <Spinner />}
+				{issue ? "Update issue" : "Submit New Issue"} {loading && <Spinner />}
 			</Button>
 		</form>
 	);
