@@ -32,11 +32,19 @@ const IssueForm = ({ issue }: Props) => {
 		formState: { errors },
 	} = useForm<IssueForm>();
 	const onSubmit = handleSubmit(async (data) => {
-		try {
-			setLoading(true);
-			await axios.post("/api/issues", data);
-			router.push("/issues");
-		} catch (error) {}
+		if (issue) {
+			try {
+				setLoading(true);
+				await axios.patch(`/api/issues/${issue.id}`, data);
+				router.push("/issues");
+			} catch (error) {}
+		} else {
+			try {
+				setLoading(true);
+				await axios.post("/api/issues", data);
+				router.push("/issues");
+			} catch (error) {}
+		}
 	});
 	return (
 		<form
