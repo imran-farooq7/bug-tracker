@@ -1,6 +1,6 @@
 import FormSkeleton from "../components/FormSkeleton";
 
-const LoadingIssueDetailPage = () => {
+const NewIssueLoading = () => {
 	return <FormSkeleton />;
 };
-export default LoadingIssueDetailPage;
+export default NewIssueLoading;
