@@ -30,3 +30,14 @@ export async function PATCH(req: NextRequest, { params }: Props) {
 
 	return NextResponse.json({ message: "updated issue" }, { status: 200 });
 }
+
+export async function DELETE(req: NextRequest, { params }: Props) {
+	// const body = await req.json();
+	await prisma.issue.delete({
+		where: {
+			id: params.id,
+		},
+	});
+
+	return NextResponse.json({ message: "deleted issue" }, { status: 200 });
+}
