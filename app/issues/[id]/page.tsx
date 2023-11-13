@@ -4,6 +4,7 @@ import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
+import DeleteButton from "../components/DeleteButton";
 // import SimpleMdeReact from "react-simplemde-editor";
 
 interface Props {
@@ -20,8 +21,8 @@ const IssueDetail = async ({ params }: Props) => {
 	// console.log(issue);
 	if (!issue) notFound();
 	return (
-		<Grid columns={{ initial: "1", md: "2" }} gapY={"2"}>
-			<Box>
+		<Grid columns={{ initial: "1", md: "5" }} gapY={"2"} gapX={"4"}>
+			<Box className="col-span-3">
 				<Heading>{issue.title}</Heading>
 				<Flex className="space-x-3" my={"2"}>
 					<IssueStatusBadge status={issue.status} />
@@ -32,10 +33,13 @@ const IssueDetail = async ({ params }: Props) => {
 					<Markdown>{issue.description}</Markdown>
 				</Card>
 			</Box>
-			<Box>
-				<Button size={"4"} radius="large">
-					<Link href={`./${issue.id}/edit`}>Edit</Link>
-				</Button>
+			<Box ml={"1"}>
+				<Flex gap={"4"} direction={"column"}>
+					<Button size={"4"} radius="large">
+						<Link href={`./${issue.id}/edit`}>Edit</Link>
+					</Button>
+					<DeleteButton id={issue.id} />
+				</Flex>
 			</Box>
 		</Grid>
 	);

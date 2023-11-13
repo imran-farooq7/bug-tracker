@@ -1,4 +1,4 @@
-import { Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "./theme-config.css";
 import type { Metadata } from "next";
@@ -28,7 +28,8 @@ export default function RootLayout({
 			<body>
 				<Theme appearance="light" accentColor="ruby">
 					<Navbar />
-					{children}
+
+					<Container>{children}</Container>
 				</Theme>
 			</body>
 		</html>
