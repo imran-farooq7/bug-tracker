@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PiBugBeetleFill } from "react-icons/pi";
 import { useSession } from "next-auth/react";
-import { Flex } from "@radix-ui/themes";
+import { Avatar, DropdownMenu, Flex } from "@radix-ui/themes";
 
 const Navbar = () => {
 	const pathName = usePathname();
@@ -12,7 +12,7 @@ const Navbar = () => {
 	console.log(status, "status from session");
 
 	return (
-		<nav className="flex items-center h-14 px-8 justify-between mb-5 border-b">
+		<nav className="flex items-center h-16 px-8 justify-between mb-5 border-b">
 			<Flex>
 				<Link href="/" className="text-3xl">
 					<PiBugBeetleFill />
@@ -37,10 +37,27 @@ const Navbar = () => {
 				</ul>
 			</Flex>
 			{status === "authenticated" && (
-				<Link href={"/api/auth/signout"}>Log out</Link>
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						<Avatar
+							src={session.user!.image!}
+							fallback="?"
+							radius="full"
+							className="hover:cursor-pointer"
+						/>
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Label>{session.user?.email}</DropdownMenu.Label>
+						<DropdownMenu.Item>
+							<Link href={"/api/auth/signout"} className="w-full">
+								Log out
+							</Link>
+						</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
 			)}
 			{status === "unauthenticated" && (
-				<Link href={"/api/auth/signin"}>Log in</Link>
+				<Link href={"/api/auth/signin"}>Log In</Link>
 			)}
 		</nav>
 	);
