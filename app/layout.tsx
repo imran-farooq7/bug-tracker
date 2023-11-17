@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Navbar from "./Navbar";
 import "./globals.css";
+import Provider from "./auth/Provider";
 
 // const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -27,9 +28,11 @@ export default function RootLayout({
 		<html lang="en" className={poppins.variable}>
 			<body>
 				<Theme appearance="light" accentColor="ruby">
-					<Navbar />
+					<Provider>
+						<Navbar />
 
-					<Container>{children}</Container>
+						<Container>{children}</Container>
+					</Provider>
 				</Theme>
 			</body>
 		</html>
