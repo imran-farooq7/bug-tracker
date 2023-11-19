@@ -1,5 +1,7 @@
 import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
 interface Props {
 	params: {
 		id: string;
@@ -7,6 +9,8 @@ interface Props {
 }
 
 export async function PATCH(req: NextRequest, { params }: Props) {
+	const session = await getServerSession(authOptions);
+	if (!session) return NextResponse.json({}, { status: 401 });
 	const body = await req.json();
 	const issue = await prisma.issue.findUnique({
 		where: {
@@ -33,6 +37,8 @@ export async function PATCH(req: NextRequest, { params }: Props) {
 
 export async function DELETE(req: NextRequest, { params }: Props) {
 	// const body = await req.json();
+	const session = await getServerSession(authOptions);
+	if (!session) return NextResponse.json({}, { status: 401 });
 	await prisma.issue.delete({
 		where: {
 			id: params.id,

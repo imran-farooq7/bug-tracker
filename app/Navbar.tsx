@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { PiBugBeetleFill } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 import { Avatar, DropdownMenu, Flex } from "@radix-ui/themes";
+import Skeleton from "react-loading-skeleton";
+import Spinner from "./components/Spinner";
 
 const Navbar = () => {
 	const pathName = usePathname();
@@ -36,6 +38,7 @@ const Navbar = () => {
 					</li>
 				</ul>
 			</Flex>
+			{status === "loading" && <Spinner />}
 			{status === "authenticated" && (
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>

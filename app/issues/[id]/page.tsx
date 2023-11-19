@@ -5,6 +5,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import DeleteButton from "../components/DeleteButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 // import SimpleMdeReact from "react-simplemde-editor";
 
 interface Props {
@@ -13,6 +15,8 @@ interface Props {
 	};
 }
 const IssueDetail = async ({ params }: Props) => {
+	const session = await getServerSession(authOptions);
+	// console.log(session?.user, "session user");
 	const issue = await prisma.issue.findUnique({
 		where: {
 			id: params.id,
@@ -33,14 +37,16 @@ const IssueDetail = async ({ params }: Props) => {
 					<Markdown>{issue.description}</Markdown>
 				</Card>
 			</Box>
-			<Box ml={"1"}>
-				<Flex gap={"4"} direction={"column"}>
-					<Button size={"4"} radius="large">
-						<Link href={`./${issue.id}/edit`}>Edit</Link>
-					</Button>
-					<DeleteButton id={issue.id} />
-				</Flex>
-			</Box>
+			{session && (
+				<Box ml={"1"}>
+					<Flex gap={"4"} direction={"column"}>
+						<Button size={"4"} radius="large">
+							<Link href={`./${issue.id}/edit`}>Edit</Link>
+						</Button>
+						<DeleteButton id={issue.id} />
+					</Flex>
+				</Box>
+			)}
 		</Grid>
 	);
 };
