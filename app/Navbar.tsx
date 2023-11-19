@@ -10,6 +10,7 @@ import Spinner from "./components/Spinner";
 const Navbar = () => {
 	const pathName = usePathname();
 	const { data: session, status } = useSession();
+	console.log(session);
 
 	console.log(status, "status from session");
 

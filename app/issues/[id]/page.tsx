@@ -7,6 +7,7 @@ import Markdown from "react-markdown";
 import DeleteButton from "../components/DeleteButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import AssigneeSelect from "../components/AssigneeSelect";
 // import SimpleMdeReact from "react-simplemde-editor";
 
 interface Props {
@@ -40,6 +41,7 @@ const IssueDetail = async ({ params }: Props) => {
 			{session && (
 				<Box ml={"1"}>
 					<Flex gap={"4"} direction={"column"}>
+						<AssigneeSelect />
 						<Button size={"4"} radius="large">
 							<Link href={`./${issue.id}/edit`}>Edit</Link>
 						</Button>
