@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import Navbar from "./Navbar";
 import "./globals.css";
 import Provider from "./auth/Provider";
+import QueryProvider from "./QueryClient/QueryProvider";
 
 // const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -28,11 +29,12 @@ export default function RootLayout({
 		<html lang="en" className={poppins.variable}>
 			<body>
 				<Theme appearance="light" accentColor="ruby">
-					<Provider>
-						<Navbar />
-
-						<Container>{children}</Container>
-					</Provider>
+					<QueryProvider>
+						<Provider>
+							<Navbar />
+							<Container>{children}</Container>
+						</Provider>
+					</QueryProvider>
 				</Theme>
 			</body>
 		</html>
