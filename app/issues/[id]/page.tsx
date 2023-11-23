@@ -41,7 +41,7 @@ const IssueDetail = async ({ params }: Props) => {
 			{session && (
 				<Box ml={"1"}>
 					<Flex gap={"4"} direction={"column"}>
-						<AssigneeSelect />
+						<AssigneeSelect id={params.id} assignId={issue.assignedToUserId!} />
 						<Button size={"4"} radius="large">
 							<Link href={`./${issue.id}/edit`}>Edit</Link>
 						</Button>
