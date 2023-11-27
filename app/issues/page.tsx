@@ -3,6 +3,7 @@ import { Table, TableCell, TableColumnHeaderCell } from "@radix-ui/themes";
 import Link from "next/link";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import IssueActions from "./components/IssueActions";
+import IssuesFilter from "./components/IssuesFilter";
 
 const IssuesPage = async () => {
 	const issues = await prisma.issue.findMany();
@@ -11,6 +12,7 @@ const IssuesPage = async () => {
 	return (
 		<div className="max-w-7xl px-4 space-y-4">
 			<IssueActions />
+			{/* <IssuesFilter /> */}
 			<Table.Root variant="surface">
 				<Table.Header>
 					<Table.Row>
