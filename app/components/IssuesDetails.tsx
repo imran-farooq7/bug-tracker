@@ -26,7 +26,7 @@ const IssuesDetails = ({ open, inProgress, closed }: Props) => {
 		},
 	];
 	return (
-		<Flex>
+		<Flex gap={"5"}>
 			{issues.map((issue) => (
 				<Card key={issue.label}>
 					<Flex direction={"column"}>
